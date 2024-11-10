@@ -15,7 +15,7 @@ class AuthController extends Controller
 
         // If invalid
         if (!Auth::attempt($credentials)) {
-            return $this->respondWithError('Your credentials are incorrect. Please try again.');
+            return $this->responseWithError('Your credentials are incorrect. Please try again.');
         }
 
         // Save activity
@@ -26,7 +26,7 @@ class AuthController extends Controller
 
         $token = Auth::user()->createToken('authToken', ['*'], $expiration)->plainTextToken;
 
-        return $this->respondWithSuccess([
+        return $this->responseWithSuccess([
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => $expiration->timestamp,
@@ -34,7 +34,7 @@ class AuthController extends Controller
     }
 
     public function me() {
-        return $this->respondWithSuccess(auth()->user());
+        return $this->responseWithSuccess(auth()->user());
     }
 
     public function logout(Request $request)
@@ -45,6 +45,6 @@ class AuthController extends Controller
         // Delete token
         $request->user()->currentAccessToken()->delete();
 
-        return $this->respondWithSuccess('Successfully logged out.');
+        return $this->responseWithSuccess('Successfully logged out.');
     }
 }

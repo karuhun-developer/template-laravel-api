@@ -20,16 +20,7 @@ trait WithGetFilterData {
                 if(!isset($value['no_search'])) {
                     $field = $value['field'];
 
-                    if(str_contains($field, '.')) {
-                        // Relationship search
-                        [$relation, $relatedAttribute] = explode('.', $field);
-                        $query->orWhereHas($relation, function ($q) use ($relatedAttribute, $s) {
-                            $q->where($relatedAttribute, 'like', "%$s%");
-                        });
-                    } else {
-                        // Normal search
-                        $query->orWhere($field, 'like', "%$s%");
-                    }
+                    $query->orWhere($field, 'like', "%$s%");
                 }
             }
         });
