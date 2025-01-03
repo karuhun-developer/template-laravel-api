@@ -29,7 +29,7 @@ trait WithGetFilterData {
 
         $model = $model->orderBy($orderBy, $order);
 
-        $model = $model->latest();
+        // $model = $model->latest();
 
         return $model->paginate($paginate);
     }
