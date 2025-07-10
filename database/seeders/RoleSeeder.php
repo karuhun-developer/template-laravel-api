@@ -48,8 +48,8 @@ class RoleSeeder extends Seeder
 
     public function run(): void
     {
-        $superadmin = Role::findOrCreate('superadmin', 'web');
-        $user = Role::findOrCreate('user', 'web');
+        $superadmin = Role::findOrCreate('superadmin', 'api');
+        $user = Role::findOrCreate('user', 'api');
 
         // Generate Permission
         // Get all route names
@@ -61,7 +61,7 @@ class RoleSeeder extends Seeder
             if(!in_array($route, $this->routeExcept) && !is_null($route)) {
                 foreach($this->permissionType as $type) {
                     $permission = $type . '.' . $route;
-                    $permission = Permission::findOrCreate($permission, 'web');
+                    $permission = Permission::findOrCreate($permission, 'api');
 
                     // Give superadmin permission
                     if(!in_array($route, $this->superadminExcept)) {

@@ -27,6 +27,8 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    protected $guard_name = 'api';
+
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
